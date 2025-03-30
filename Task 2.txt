@@ -1,0 +1,166 @@
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Genstore'),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {},
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications_none),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildCircularIcon(Icons.male, 'Men'),
+                    _buildCircularIcon(Icons.female, 'Women'),
+                    _buildCircularIcon(Icons.watch, 'Watch'),
+                    _buildCircularIcon(Icons.sports_soccer, 'Sports'),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.network(
+                      'https://images.pexels.com/photos/19589906/pexels-photo-19589906/free-photo-of-eastern-dresses-2024-shoot-by-dhanno.jpeg?auto=compress&cs=tinysrgb&w=400',
+                      width: double.infinity,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    Text(
+                      'Autumn Collection\n2024',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: Colors.black45,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Featured Products',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+               
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  children: [
+                    _buildProductCard(
+                      'https://images.pexels.com/photos/31363684/pexels-photo-31363684/free-photo-of-ginger-haired-woman-in-sunlit-field-portrait.jpeg?auto=compress&cs=tinysrgb&w=400',
+                      'Skimmer',
+                      '\$45.00',
+                    ),
+                    _buildProductCard(
+                      'https://images.pexels.com/photos/19281312/pexels-photo-19281312/free-photo-of-kurta-shalwar-for-girl-shoot-by-dhanno.jpeg?auto=compress&cs=tinysrgb&w=400',
+                      'Long Sleeve Dress',
+                      '\$55.00',
+                    ),
+                    _buildProductCard(
+                      'https://images.pexels.com/photos/6740046/pexels-photo-6740046.jpeg?auto=compress&cs=tinysrgb&w=400',
+                      'Sportswear Set',
+                      '\$35.00',
+                    ),
+                    _buildProductCard(
+                      'https://images.pexels.com/photos/27603274/pexels-photo-27603274/free-photo-of-fashion-eastern-dresses-by-dhanno.jpeg?auto=compress&cs=tinysrgb&w=400',
+                      'Casual Dress',
+                      '\$40.00',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCircularIcon(IconData icon, String label) {
+    return Column(
+      children: [
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.grey[300],
+          ),
+          child: Icon(icon, size: 30, color: Colors.black),
+        ),
+        SizedBox(height: 4),
+        Text(label, style: TextStyle(fontSize: 12)),
+      ],
+    );
+  }
+
+  Widget _buildProductCard(String imageUrl, String title, String price) {
+    return Card(
+      child: Column(
+        children: [
+          Image.network(
+            imageUrl,
+            width: double.infinity,
+            height: 150,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(price, style: TextStyle(color: Colors.green)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
